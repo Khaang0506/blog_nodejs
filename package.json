@@ -1,0 +1,27 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Making a website to write blog with Nodejs & ExpressJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Khaang0506/blog_nodejs.git"
+  },
+  "keywords": [
+    "khang_blog",
+    "khang_nodejs",
+    "nodejs"
+  ],
+  "author": "Hoang Khang (Hayden Karter)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Khaang0506/blog_nodejs/issues"
+  },
+  "homepage": "https://github.com/Khaang0506/blog_nodejs#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
