@@ -4,7 +4,7 @@
   "description": "Making a website to write blog with Nodejs & ExpressJS",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon --inspect index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
