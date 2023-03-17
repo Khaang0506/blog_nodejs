@@ -1,6 +1,16 @@
+const Tests = require('../models/Course')
+const { multipleMongooseToObject } = require('../../util/mongoose')
+
 class SiteController {
-    index(req, res) {
-        res.render('home');
+    async index(req, res, next) {
+        Tests.find({})
+            .then(tests => {
+                res.render('home',
+                    {
+                        tests: multipleMongooseToObject(tests)
+                    })
+            })
+            .catch(next)
     }
 
     //GET  /news/:slug
