@@ -39,7 +39,7 @@
       </select>
 
       <button
-        class="btn btn-outline-primary btn-sm check-all-submit-btn disabled"
+        class="btn btn-outline-primary btn-sm check-all-submit-btn" disabled
       >Implement</button>
     </div>
   </div>
@@ -161,7 +161,7 @@
   var checkboxAll = $('#checkbox-all');
   var courseItemCheckbox = $('input[name="courseIds[]"]');
   var checkAllSubmit = $('.check-all-submit-btn');
-  var containerForm = document.forms['container-form'];
+  var containerForm = $('form[name="container-form"]');
 
   checkboxAll.change(function(){
     var isChecked = $(this).prop('checked');
@@ -174,19 +174,12 @@
     renderCheckAllSubmitBtn();
   })
 
-  checkAllSubmit.on('submit', function(e){
-    var isSubmittable = !$(this).hasClass('disabled');
-    if(!isSubmittable){
-      e.preventDefault();
-    }
-  })
-
   function renderCheckAllSubmitBtn(){
     var checkedCount = $('input[name="courseIds[]"]:checked').length;
     if(checkedCount > 0){
-      checkAllSubmit.removeClass('disabled');
+      checkAllSubmit.attr('disabled',false);
     }else{
-      checkAllSubmit.addClass('disabled');
+      checkAllSubmit.attr('disabled',true);
     }
   }
 </script>
