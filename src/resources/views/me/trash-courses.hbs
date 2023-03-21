@@ -24,7 +24,7 @@
         <th scope="col">No.</th>
         <th scope="col">Name</th>
         <th scope="col">Level</th>
-        <th scope="col" colspan="2">Create At</th>
+        <th scope="col" colspan="2">Delete At</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -34,7 +34,7 @@
           <td scope="row">{{sum @index 1}}</td>
           <td>{{this.name}}</td>
           <td>{{this.level}}</td>
-          <td>{{this.createdAt}}</td>
+          <td>{{this.deletedAt}}</td>
           <td>
             <a
               href=""
@@ -108,15 +108,15 @@
     </script>
 
 <script>
-  const deleteModal = document.getElementById('delete-course-model') 
-  //When click the button "Delete", it open the modal
+  const deleteModal = document.getElementById('delete-course-model') ;
+
   deleteModal.addEventListener('show.bs.modal', event => { 
     const button = event.relatedTarget;
     const id = button.getAttribute('data-bs-id'); 
     const deleteForm = document.forms['deleteCourseForm'];
     
     var btnDeleteCourse = document.getElementById('btn-delete-course');
-    //When delete course btn clicked
+
     btnDeleteCourse.onclick = function(){ 
       deleteForm.action = '/courses/' + id + '/force?_method=DELETE'; 
       deleteForm.submit(); 
@@ -124,11 +124,11 @@
   });
   
   const restoreForm = document.forms['restoreCourseForm'];
-  const btnRestored = $('.btn-restored')
+  const btnRestored = $('.btn-restored');
   btnRestored.click(function(e){
     e.preventDefault();
-    var courseId = $(this).data('bs-id')
+    var courseId = $(this).data('bs-id');
     restoreForm.action = '/courses/' + courseId + '/restore?_method=PATCH'; 
     restoreForm.submit(); 
-  })
+  });
 </script>
