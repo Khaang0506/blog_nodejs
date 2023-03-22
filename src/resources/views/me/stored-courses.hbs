@@ -55,13 +55,14 @@
     <thead class="thead-dark">
       <tr>
         <th></th>
-        <th scope="col">No.</th>
+        <th scope="col">No. {{{sortable "_id" _sort}}}</th>
         <th scope="col">
           Name
-          {{{sortable 'name' _sort}}}
+          {{{sortable "name" _sort}}}
         </th>
-        <th scope="col">Level {{{sortable 'level' _sort}}}</th>
-        <th scope="col" colspan="2">Create At {{{sortable 'createdAt' _sort}}}</th>
+        <th scope="col">Level {{{sortable "level" _sort}}}</th>
+        <th scope="col" colspan="2">Create At
+          {{{sortable "createdAt" _sort}}}</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -79,7 +80,8 @@
               />
             </div>
           </td>
-          <td scope="row">{{sum @index 1}}</td>
+          {{!-- <td scope="row">{{sum @index 1}}</td> --}}
+          <td scope="row">{{this._id}}</td>
           <td>{{this.name}}</td>
           <td>{{this.level}}</td>
           <td>{{this.createdAt}}</td>
@@ -154,22 +156,40 @@
 
 <script>
   const deleteModal = document.getElementById('delete-course-model')
-  deleteModal.addEventListener('show.bs.modal', event => { const
-  button=event.relatedTarget; const id = button.getAttribute('data-bs-id');
-  const deleteForm = document.forms['deleteCourseForm']; var
-  btnDeleteCourse=document.getElementById('btn-delete-course');
-  btnDeleteCourse.onclick = function(){ deleteForm.action = '/courses/' + id +
-  '?_method=DELETE'; deleteForm.submit(); } }) 
-  var checkboxAll = $('#checkbox-all'); var courseItemCheckbox = $('input[name="courseIds[]"]');
-  var checkAllSubmit = $('.check-all-submit-btn'); var containerForm =
-  $('form[name="container-form"]'); checkboxAll.change(function(){ var isChecked
-  = $(this).prop('checked'); courseItemCheckbox.prop('checked',isChecked);
-  renderCheckAllSubmitBtn(); }); courseItemCheckbox.change(function(){ var
-  isCheckedAll = courseItemCheckbox.length ===
-  $('input[name="courseIds[]"]:checked').length; checkboxAll.prop('checked',
-  isCheckedAll); renderCheckAllSubmitBtn(); }) 
-  function renderCheckAllSubmitBtn(){ var checkedCount =
-  $('input[name="courseIds[]"]:checked').length; if(checkedCount > 0){
-  checkAllSubmit.attr('disabled', false); }else{ checkAllSubmit.attr('disabled',
-  true); } }
+  deleteModal.addEventListener('show.bs.modal', event => { 
+    const button=event.relatedTarget; 
+    const id = button.getAttribute('data-bs-id');
+    const deleteForm = document.forms['deleteCourseForm']; 
+    var btnDeleteCourse=document.getElementById('btn-delete-course');
+    btnDeleteCourse.onclick = function(){ 
+      deleteForm.action = '/courses/' + id +'?_method=DELETE'; 
+      deleteForm.submit(); 
+    } 
+  }) 
+  
+  var checkboxAll = $('#checkbox-all'); 
+  var courseItemCheckbox = $('input[name="courseIds[]"]'); 
+  var checkAllSubmit = $('.check-all-submit-btn'); 
+  var containerForm = $('form[name="container-form"]'); 
+  
+  checkboxAll.change(function(){ 
+      var isChecked = $(this).prop('checked'); 
+      courseItemCheckbox.prop('checked',isChecked);
+      renderCheckAllSubmitBtn(); 
+  }); 
+  
+  courseItemCheckbox.change(function(){ 
+    var isCheckedAll = courseItemCheckbox.length === $('input[name="courseIds[]"]:checked').length; 
+    checkboxAll.prop('checked',isCheckedAll); 
+    renderCheckAllSubmitBtn(); 
+  }) 
+  
+  function renderCheckAllSubmitBtn(){ 
+    var checkedCount = $('input[name="courseIds[]"]:checked').length; 
+    if(checkedCount > 0){
+      checkAllSubmit.attr('disabled', false); 
+    }else{ 
+      checkAllSubmit.attr('disabled',true); 
+    } 
+  }
 </script>

@@ -17,15 +17,15 @@ class CourseController {
         res.render('courses/create')
     }
 
-    //POST /course/create
+    //POST /course/store
     store(req, res, next) {
         req.body.image = `https://i.ytimg.com/vi/${req.body.videoId}/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLD9QFkahguHM2_ISOBWeVW1UwbaMw`
+        
         const course = new Course(req.body)
-        course.save()
+        course
+            .save()
             .then(() => res.redirect('/me/stored/courses'))
-            .catch(error => {
-
-            })
+            .catch(next)
     }
 
     //GET /course/:id/edit
